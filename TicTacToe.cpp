@@ -57,17 +57,20 @@ public:
 
 };
 
-void input(Field& field, string str, string value)
+bool input(Field& field, string str, string value)
 {
 	string cellNumber = "0";
 	while (cellNumber > "9" || cellNumber < "1")
 	{
-		cout << str << "Enter cell number: ";
+		cout << str << "Enter cell number or \"e\" for exit: ";
 		cin >> cellNumber;
+		if (cellNumber == "e")
+			return false;
 		if (cellNumber > "9" || cellNumber < "1")
 			cout << "\nUncorrect! Try again. ";
 	}
 	field.changeCell(cellNumber, value);
+	return true;
 }
 
 int main()
@@ -78,9 +81,10 @@ int main()
 	do
 	{
 		field.print();
-		input(field, "\n~~~First player\n", firstPlayer);
-
-		input(field, "\n~~~Second player\n", secondPlayer);
+		if (!input(field, "\n~~~First player\n", firstPlayer))
+			return 0;
+		if (!input(field, "\n~~~Second player\n", secondPlayer))
+			return 0;
 
 	} while (field.getCounter() < 9);
 
