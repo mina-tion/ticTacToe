@@ -1,61 +1,17 @@
+/*
+ - Ввод номера ячейки
+ - Обновление поля вверху
+ - Провека на выигрыш\проигрыш
+ - Проверка на уже введённый номер ячейки
+ - Компьютерный игрок
+ - Запрос на повторную игру
+*/
+
 #include <iostream>
 #include <conio.h>
+#include "Field.h"
 using namespace std;
 
-class Field
-{
-private:
-	string cells[3][3];
-	int counter = 0;
-public:
-
-	Field()
-	{
-		cells[0][0] = "1";
-		cells[0][1] = "2";
-		cells[0][2] = "3";
-		cells[1][0] = "4";
-		cells[1][1] = "5";
-		cells[1][2] = "6";
-		cells[2][0] = "7";
-		cells[2][1] = "8";
-		cells[2][2] = "9";
-	}
-
-
-	void changeCell(string cellNumber, string value)
-	{
-		counter++;
-		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 3; j++)
-			{
-				if (cells[i][j] == cellNumber)
-				{
-					cells[i][j] = value;
-					cout << endl << cells[i][j];
-				}
-			}
-		print();
-
-	}
-
-	int getCounter()
-	{
-		return counter;
-	}
-
-	void print()
-	{
-		cout << endl << "ЙНННННЛНННННЛННННН\xBB";
-		cout << endl << "є  " << cells[0][0] << "  є  " << cells[0][1] << "  є  " << cells[0][2] << "  є";
-		cout << endl << "МНННННОНННННОННННН№";
-		cout << endl << "є  " << cells[1][0] << "  є  " << cells[1][1] << "  є  " << cells[1][2] << "  є";
-		cout << endl << "МНННННОНННННОННННН№";
-		cout << endl << "є  " << cells[2][0] << "  є  " << cells[2][1] << "  є  " << cells[2][2] << "  є";
-		cout << endl << "ИНННННКНННННКННННН\xBC";
-	}
-
-};
 
 bool input(Field& field, string str, string value)
 {
