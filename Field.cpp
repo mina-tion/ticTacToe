@@ -1,32 +1,27 @@
 #include "Field.h"
+#include "Graphic.h"
 using namespace std;
 Field::Field()
 {
-	cells[0][0] = "1";
-	cells[0][1] = "2";
-	cells[0][2] = "3";
-	cells[1][0] = "4";
-	cells[1][1] = "5";
-	cells[1][2] = "6";
-	cells[2][0] = "7";
-	cells[2][1] = "8";
-	cells[2][2] = "9";
+	cells[0] = '1';
+	cells[1] = '2';
+	cells[2] = '3';
+	cells[3] = '4';
+	cells[4] = '5';
+	cells[5] = '6';
+	cells[6] = '7';
+	cells[7] = '8';
+	cells[8] = '9';
 }
 
-void Field::changeCell(string cellNumber, string value)
+void Field::changeCell(char cellNumber, char value)
 {
 	counter++;
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-		{
-			if (cells[i][j] == cellNumber)
+	for (int i = 0; i < 9; ++i)
+			if (cells[i] == cellNumber)
 			{
-				cells[i][j] = value;
-				cout << endl << cells[i][j];
+				cells[i] = value;
 			}
-		}
-	print();
-
 }
 
 int Field::getCounter()
@@ -36,11 +31,54 @@ int Field::getCounter()
 
 void Field::print()
 {
-	cout << endl << "ษอออออหอออออหอออออ\xBB";
-	cout << endl << "บ  " << cells[0][0] << "  บ  " << cells[0][1] << "  บ  " << cells[0][2] << "  บ";
-	cout << endl << "ฬอออออฮอออออฮอออออน";
-	cout << endl << "บ  " << cells[1][0] << "  บ  " << cells[1][1] << "  บ  " << cells[1][2] << "  บ";
-	cout << endl << "ฬอออออฮอออออฮอออออน";
-	cout << endl << "บ  " << cells[2][0] << "  บ  " << cells[2][1] << "  บ  " << cells[2][2] << "  บ";
-	cout << endl << "ศอออออสอออออสอออออ\xBC";
+	
+	Graphic::topBorder();
+	cout << endl << "บ  " << cells[0] << "  บ  " << cells[1] << "  บ  " << cells[2] << "  บ";
+	Graphic::innerBorder();
+	cout << endl << "บ  " << cells[3] << "  บ  " << cells[4] << "  บ  " << cells[5] << "  บ";
+	Graphic::innerBorder();
+	cout << endl << "บ  " << cells[6] << "  บ  " << cells[7] << "  บ  " << cells[8] << "  บ";
+	Graphic::bottomBorder();
+	Graphic::setTextColor(9, 0);
+	
 }
+
+bool Field::isMarked(char cellNumber)
+{
+	int cell = cellNumber - '0';
+	if (cells[cell - 1] == 'X' || cells[cell - 1] == '0')
+		return true;
+	else return false;
+}
+
+bool Field::getWinner()
+{
+	char playersArray[2] = { 'X', '0' };
+	for (int i = 0; i < 2; i++)
+	{
+		if (cells[0] == playersArray[i] && cells[1] == playersArray[i] && cells[2] == playersArray[i] ||
+			cells[0] == playersArray[i] && cells[3] == playersArray[i] && cells[6] == playersArray[i] ||
+			cells[3] == playersArray[i] && cells[4] == playersArray[i] && cells[5] == playersArray[i] ||
+			cells[6] == playersArray[i] && cells[7] == playersArray[i] && cells[8] == playersArray[i] ||
+			cells[2] == playersArray[i] && cells[5] == playersArray[i] && cells[8] == playersArray[i] ||
+			cells[1] == playersArray[i] && cells[4] == playersArray[i] && cells[7] == playersArray[i] ||
+			cells[2] == playersArray[i] && cells[4] == playersArray[i] && cells[6] == playersArray[i] ||
+			cells[0] == playersArray[i] && cells[4] == playersArray[i] && cells[8] == playersArray[i])
+
+		{
+			if (playersArray[i] == 'X')
+			{
+				cout << endl << "First";
+				return true;
+			}
+			if (playersArray[i] == '0')
+			{
+				cout << endl << "Second";
+				return true;
+			}
+		}
+	}
+	return false;
+	
+}
+
