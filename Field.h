@@ -7,11 +7,11 @@ class Field
 {
 public:
 	Field();
-	void changeCell(string cellNumber, string value);
+	void changeCell(char cellNumber, char value);
 	int getCounter();
 	void print();
 
 private:
-	string cells[3][3];
+	char cells[3][3];
 	int counter = 0;
 };

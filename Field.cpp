@@ -2,18 +2,18 @@
 using namespace std;
 Field::Field()
 {
-	cells[0][0] = "1";
-	cells[0][1] = "2";
-	cells[0][2] = "3";
-	cells[1][0] = "4";
-	cells[1][1] = "5";
-	cells[1][2] = "6";
-	cells[2][0] = "7";
-	cells[2][1] = "8";
-	cells[2][2] = "9";
+	cells[0][0] = '1';
+	cells[0][1] = '2';
+	cells[0][2] = '3';
+	cells[1][0] = '4';
+	cells[1][1] = '5';
+	cells[1][2] = '6';
+	cells[2][0] = '7';
+	cells[2][1] = '8';
+	cells[2][2] = '9';
 }
 
-void Field::changeCell(string cellNumber, string value)
+void Field::changeCell(char cellNumber, char value)
 {
 	counter++;
 	for (int i = 0; i < 3; i++)
@@ -25,8 +25,6 @@ void Field::changeCell(string cellNumber, string value)
 				cout << endl << cells[i][j];
 			}
 		}
-	print();
-
 }
 
 int Field::getCounter()
