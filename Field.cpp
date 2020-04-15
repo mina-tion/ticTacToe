@@ -28,18 +28,44 @@ int Field::getCounter()
 {
 	return counter;
 }
+void Field::printCell(int cellNumber)
+{
+	if (cells[cellNumber] == 'X')
+		Graphic::setTextColor(Graphic::Color::Red);
+	if (cells[cellNumber] == '0')
+		Graphic::setTextColor(Graphic::Color::Blue);
+	cout << cells[cellNumber];
+	Graphic::setTextColor(Graphic::Color::Green);
 
+}
 void Field::print()
 {
-	
+	Graphic::setTextColor(Graphic::Color::Green);
 	Graphic::topBorder();
-	cout << endl << "º  " << cells[0] << "  º  " << cells[1] << "  º  " << cells[2] << "  º";
+	cout << endl << "º  ";
+	printCell(0);
+	cout << "  º  ";
+	printCell(1);
+	cout << "  º  ";
+	printCell(2);
+	cout << "  º ";
 	Graphic::innerBorder();
-	cout << endl << "º  " << cells[3] << "  º  " << cells[4] << "  º  " << cells[5] << "  º";
+	cout << endl << "º  ";
+	printCell(3);
+	cout << "  º  ";
+	printCell(4);
+	cout << "  º  ";
+	printCell(5);
+	cout << "  º ";
 	Graphic::innerBorder();
-	cout << endl << "º  " << cells[6] << "  º  " << cells[7] << "  º  " << cells[8] << "  º";
+	cout << endl << "º  ";
+	printCell(6);
+	cout << "  º  ";
+	printCell(7);
+	cout << "  º  ";
+	printCell(8);
+	cout << "  º ";
 	Graphic::bottomBorder();
-	Graphic::setTextColor(9, 0);
 	
 }
 

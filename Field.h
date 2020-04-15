@@ -12,7 +12,7 @@ public:
 	void print();
 	bool isMarked(char cellNumber);
 	bool getWinner();
-	
+	void printCell(int cellNumber);
 private:
 	char cells[9];
 	int counter = 0;
