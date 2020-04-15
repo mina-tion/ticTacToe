@@ -77,7 +77,7 @@ bool Field::isMarked(char cellNumber)
 	else return false;
 }
 
-bool Field::getWinner()
+string Field::getWinner()
 {
 	char playersArray[2] = { 'X', '0' };
 	for (int i = 0; i < 2; i++)
@@ -93,18 +93,14 @@ bool Field::getWinner()
 
 		{
 			if (playersArray[i] == 'X')
-			{
-				cout << endl << "First";
-				return true;
-			}
+				return "First";
+		
 			if (playersArray[i] == '0')
-			{
-				cout << endl << "Second";
-				return true;
-			}
+				return "Second";
+		
 		}
 	}
-	return false;
+	return "";
 	
 }
 

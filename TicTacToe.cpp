@@ -34,39 +34,51 @@ bool input(Field& field, string str, char value)
 	return true;
 }
 
+bool playGame()
+{
+	const char firstPlayer = 'X';
+	const char secondPlayer = '0';
+	Field field;
+	field.print();
+	bool isFirstPlayer = true;
+	while (field.getCounter() < 9)
+	{
+		if (isFirstPlayer)
+		{
+			if (!input(field, "\n~~~First player\n", firstPlayer))
+				return false;
+			
+		}
+		else
+		{
+			if (!input(field, "\n~~~Second player\n", secondPlayer))
+				return false;
+		}
+		isFirstPlayer = !isFirstPlayer;
+		system("cls");
+		field.print();
+
+		string winResult = field.getWinner();
+		if (!winResult.empty())
+		{
+			cout << endl << winResult << " player is winner";
+			return false;
+		}
+
+	};
+	cout << endl << "Dead heat";
+	return true;
+}
 
 int main()
 {
-	char firstPlayer = 'X';
-	char secondPlayer = '0';
 	char answerNewGame;
 	do {
-		Field field;
-		field.print();
-		do
-		{
-			if (!input(field, "\n~~~First player\n", firstPlayer))
-				return 0;
-			system("cls");
-			field.print();
-			if (field.getCounter() >= 9 )
-			{
-				if (field.getWinner())
-				{
-					cout << " player is winner";
-				}
-				else cout << endl << "Dead heat";
-				break;
-			}	
-			if (!input(field, "\n~~~Second player\n", secondPlayer))
-				return 0;
-			system("cls");
-			field.print();
-		} 
-		while (field.getCounter() < 9 || !(field.getWinner()));
+		if (!playGame())
+			return 0;
 		_getch();
-
 		cout << endl << "Enter \"y\" for start a new game: ";
 		cin >> answerNewGame;
 	} while (answerNewGame == 'y');
+	return 0;
 }

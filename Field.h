@@ -11,7 +11,7 @@ public:
 	int getCounter();
 	void print();
 	bool isMarked(char cellNumber);
-	bool getWinner();
+	string getWinner();
 	void printCell(int cellNumber);
 private:
 	char cells[9];
