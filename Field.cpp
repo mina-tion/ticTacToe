@@ -12,6 +12,32 @@ Field::Field()
 	cells[6] = '7';
 	cells[7] = '8';
 	cells[8] = '9';
+
+	lines[0][0] = 0;
+	lines[0][1] = 1;
+	lines[0][2] = 2;
+	lines[1][0] = 3;
+	lines[1][1] = 4;
+	lines[1][2] = 5;
+	lines[2][0] = 6;
+	lines[2][1] = 7;
+	lines[2][2] = 8;
+	lines[3][0] = 0;
+	lines[3][1] = 3;
+	lines[3][2] = 6;
+	lines[4][0] = 1;
+	lines[4][1] = 4;
+	lines[4][2] = 7;
+	lines[5][0] = 2;
+	lines[5][1] = 5;
+	lines[5][2] = 8;
+	lines[6][0] = 0;
+	lines[6][1] = 4;
+	lines[6][2] = 8;
+	lines[7][0] = 2;
+	lines[7][1] = 4;
+	lines[7][2] = 6;
+
 }
 
 void Field::changeCell(char cellNumber, char value)
@@ -28,6 +54,12 @@ int Field::getCounter()
 {
 	return counter;
 }
+
+void Field::setCell(int cellNumber, char value)
+{
+	cells[cellNumber] = value;
+}
+
 void Field::printCell(int cellNumber)
 {
 	if (cells[cellNumber] == 'X')
@@ -66,7 +98,7 @@ void Field::print()
 	printCell(8);
 	cout << "  º ";
 	Graphic::bottomBorder();
-	
+
 }
 
 bool Field::isMarked(char cellNumber)
@@ -77,30 +109,58 @@ bool Field::isMarked(char cellNumber)
 	else return false;
 }
 
+char& Field::cell(int row, int col)
+{
+	return cells[row*3+col];
+}
+
+
 string Field::getWinner()
 {
-	char playersArray[2] = { 'X', '0' };
-	for (int i = 0; i < 2; i++)
-	{
-		if (cells[0] == playersArray[i] && cells[1] == playersArray[i] && cells[2] == playersArray[i] ||
-			cells[0] == playersArray[i] && cells[3] == playersArray[i] && cells[6] == playersArray[i] ||
-			cells[3] == playersArray[i] && cells[4] == playersArray[i] && cells[5] == playersArray[i] ||
-			cells[6] == playersArray[i] && cells[7] == playersArray[i] && cells[8] == playersArray[i] ||
-			cells[2] == playersArray[i] && cells[5] == playersArray[i] && cells[8] == playersArray[i] ||
-			cells[1] == playersArray[i] && cells[4] == playersArray[i] && cells[7] == playersArray[i] ||
-			cells[2] == playersArray[i] && cells[4] == playersArray[i] && cells[6] == playersArray[i] ||
-			cells[0] == playersArray[i] && cells[4] == playersArray[i] && cells[8] == playersArray[i])
+	int counterX = 0;
+	int counter0 = 0;
 
+	for (int i = 0; i < 8; ++i)
+	{
+		counterX = 0;
+		counter0 = 0;
+		for (int k = 0; k < 3; k++)
 		{
-			if (playersArray[i] == 'X')
+			if (cells[lines[i][k]] == 'X')
+				counterX++;
+			if (cells[lines[i][k]] == '0')
+				counter0++;
+
+			if (counterX == 3)
 				return "First";
-		
-			if (playersArray[i] == '0')
+			if (counter0 == 3)
 				return "Second";
-		
+
 		}
 	}
 	return "";
-	
 }
+	/*
+	char playersArray[2] = { 'X', '0' };
+	for (int i = 0; i < 2; i++)
+	{
+		const char value = playersArray[i];
+		if (cell(0,0) == value && cells[1] == value && cells[2] == value ||
+			cells[0] == value && cells[3] == value && cells[6] == value ||
+			cells[3] == value && cells[4] == value && cells[5] == value ||
+			cells[6] == value && cells[7] == value && cells[8] == value ||
+			cells[2] == value && cells[5] == value && cells[8] == value ||
+			cells[1] == value && cells[4] == value && cells[7] == value ||
+			cells[2] == value && cells[4] == value && cells[6] == value ||
+			cells[0] == value && cells[4] == value && cells[8] == value)
+		{
+			if (value == 'X')
+				return "First";
+			if (value == '0')
+				return "Second";
+		}
+	}
+	return "";
+	*/
+
 

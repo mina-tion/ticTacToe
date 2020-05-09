@@ -5,6 +5,7 @@
  ~~~~~~~~~~ Проверка на уже введённый номер ячейки
  - Компьютерный игрок
  ~~~~~~~~~~ Запрос на повторную игру
+ - unit test
 */
 
 #include <iostream>
@@ -70,8 +71,63 @@ bool playGame()
 	return true;
 }
 
+Field testField()
+{
+	Field result;
+
+	result.setCell(0, '0');
+	result.setCell(1, 'X');
+	result.setCell(2, '0');
+	result.setCell(3, 'X');
+	result.setCell(4, '0');
+	result.setCell(5, 'X');
+	result.setCell(6, '0');
+	result.setCell(7, 'X');
+	result.setCell(8, '0');
+
+	return result;
+}
+
+
+
+bool test()
+{
+	Field field = testField();
+	string winner = field.getWinner();
+	if (winner == "Second")
+	{
+		cout << endl << "Test success!";
+		return true;
+	}
+	else
+	{
+		cout << endl << "Test fail!";
+		return false;
+	}
+	cout << endl;
+}
+/*
+void test()
+{
+	Data data = testData();
+	data.sort();
+	const Data expected = expectedData();
+	if (data == expected)
+		cout << endl << "Test success!";
+	else
+	{
+		cout << endl << "Test fail!";
+		data.print("Sorted");
+		expected.print("Expected");
+	}
+	cout << endl;
+
+} 
+*/
 int main()
 {
+	if (!test()) 
+		return 0;
 	char answerNewGame;
 	do {
 		if (!playGame())
